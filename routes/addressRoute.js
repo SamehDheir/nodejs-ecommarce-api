@@ -3,10 +3,11 @@ const express = require("express");
 const authService = require("../services/authService");
 
 const {
-  addProductToWishlist,
-  removeProductToWishlist,
-  getLoggedUserWishlist,
-} = require("../services/wishlistService");
+  addAddress,
+  removeAddress,
+  getLoggedUserAddress,
+} = require("../services/addressService");
+
 
 const router = express.Router();
 
@@ -15,19 +16,19 @@ router
   .get(
     authService.protect,
     authService.allowedTo("user"),
-    getLoggedUserWishlist
+    getLoggedUserAddress 
   )
   .post(
     authService.protect,
     authService.allowedTo("user"),
-    addProductToWishlist
+    addAddress
   );
 router
-  .route("/:productId")
+  .route("/:addressId")
   .delete(
     authService.protect,
     authService.allowedTo("user"),
-    removeProductToWishlist
+    removeAddress
   );
 
 module.exports = router;
